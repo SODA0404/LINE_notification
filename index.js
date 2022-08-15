@@ -5,13 +5,47 @@ const PORT = process.env.PORT || 3000
 const TOKEN = process.env.LINE_ACCESS_TOKEN
 
 app.use(express.json())
-app.use(express.urlencoded({
-  extended: true
-}))
+app.use(express.urlencoded({ extended: true }))
 
 app.get("/", (req, res) => {
   res.sendStatus(200)
-  res.send('This page was showed');
+  res.send("This page was showed");
+})
+
+app.post("/", function(req, res) {
+  res.send("HTTP POST request sent to the URL!")
+    const dataString = JSON.stringify(req)
+    
+        // リクエストヘッダー
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + TOKEN
+    }
+
+    // リクエストに渡すオプション
+    const webhookOptions = {
+      "hostname": "api.line.me",
+      "path": "/v2/bot/message/reply",
+      "method": "POST",
+      "headers": headers,
+      "body": dataString
+    }
+
+    // リクエストの定義
+    const request = https.request(webhookOptions, (res) => {
+      res.on("data", (d) => {
+        process.stdout.write(d)
+      })
+    })
+
+    // エラーをハンドル
+    request.on("error", (err) => {
+      console.error(err)
+    })
+
+    // データを送信
+    request.write(dataString)
+    request.end()
 })
 
 app.post("/webhook", function(req, res) {
