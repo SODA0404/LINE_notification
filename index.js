@@ -27,10 +27,6 @@ app.post("/", function(req, res) {
       {
         "type": "text",
         "text": "I received a message from node-RED"
-      },
-      {
-        "type": "text",
-        "text": req.payload
       }
     ]
   })
