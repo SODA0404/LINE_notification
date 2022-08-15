@@ -78,6 +78,10 @@ app.post("/webhook", function(req, res) {
         {
           "type": "text",
           "text": "May I help you?"
+        },
+        {
+          "type": "text",
+          "text": req
         }
       ]
     })
