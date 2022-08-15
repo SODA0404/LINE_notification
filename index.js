@@ -11,6 +11,7 @@ app.use(express.urlencoded({
 
 app.get("/", (req, res) => {
   res.sendStatus(200)
+  res.send('This page was showed');
 })
 
 app.post("/webhook", function(req, res) {
