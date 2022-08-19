@@ -12,11 +12,9 @@ elems = soup.find_all("td")
 
  #今日の天気の降水量を抽出し、今日雨が降るか確認
 today = 0
-
-for i in range(41, 49):
+for i in range(42, 46):
     if (int(elems[i].contents[1].contents[0]) > 0):
         today = 100
-
 rainy_percent.append(today)
 
  #週間天気の降水確率(%)を抽出
